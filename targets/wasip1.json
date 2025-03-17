@@ -8,7 +8,7 @@
 	"linker":        "wasm-ld",
 	"libc":          "wasi-libc",
 	"rtlib":         "compiler-rt",
-	"gc":            "precise",
+	"gc":            "boehm",
 	"scheduler":     "asyncify",
 	"default-stack-size": 65536,
 	"cflags": [
@@ -23,7 +23,8 @@
 		"--no-demangle"
 	],
 	"extra-files": [
-		"src/runtime/asm_tinygowasm.S"
+		"src/runtime/asm_tinygowasm.S",
+		"src/runtime/gc_boehm.c"
 	],
 	"emulator":      "wasmtime run --dir={tmpDir}::/tmp {}"
 }
