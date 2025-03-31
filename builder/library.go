@@ -15,6 +15,9 @@ import (
 
 // Library is a container for information about a single C library, such as a
 // compiler runtime or libc.
+//
+// Note: whenever a library gets changed, the version in compileopts/config.go
+// probably also needs to be incremented.
 type Library struct {
 	// The library name, such as compiler-rt or picolibc.
 	name string
@@ -48,7 +51,7 @@ type Library struct {
 // target config. In other words, pass this libc if the library needs a libc to
 // compile.
 func (l *Library) load(config *compileopts.Config, tmpdir string, libc *compileJob) (job *compileJob, abortLock func(), err error) {
-	outdir := config.LibcPath(l.name)
+	outdir := config.LibraryPath(l.name)
 	archiveFilePath := filepath.Join(outdir, "lib.a")
 
 	// Create a lock on the output (if supported).
